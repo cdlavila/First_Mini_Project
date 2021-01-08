@@ -1,8 +1,23 @@
 const express = require('express')
 const router = express.Router()
 const Doctor = require('../data_base/models/doctor')
+const Hospital = require('../data_base/models/hospital')
 
-/// /// DOCTOR CRUD
+// Print all doctors
+router.get('/', (req, res) => {
+  Doctor.findAll({
+    include: {
+      model: Hospital,
+      as: "Hospital",
+      attributes: ['id', 'Hospital_Name']
+    },
+    attributes: ['id', 'Doctor_Name']
+  }).then(doctors => {
+    res.json(doctors)
+  })
+})
+
+//-----DOCTOR CRUD
 
 // CREATE
 router.post('/', (req, res) => {
@@ -11,6 +26,8 @@ router.post('/', (req, res) => {
     Speciality: req.body.Speciality
   }).then(doctor => {
     res.json(doctor)
+  }).catch(err => {
+    res.json(err)
   })
 })
 
@@ -32,6 +49,8 @@ router.post('/:id', (req, res) => {
     }
   }).then(result => {
     res.json(result)
+  }).catch(err => {
+    res.json(err)
   })
 })
 

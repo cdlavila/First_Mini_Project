@@ -1,13 +1,13 @@
-const {Model, DataTypes} = require('sequelize');
-const sequelize = require('../db');
+const { Model, DataTypes } = require('sequelize')
+const sequelize = require('../db')
 
 class Hospital extends Model {}
 Hospital.init({
-    Hospital_Name: DataTypes.STRING
+  Hospital_Name: DataTypes.STRING
 }, {
-    sequelize,
-    modelName: "Hospital",
-    //freezeTableName: true
-});
+  sequelize,
+  modelName: 'Hospital'
+  // freezeTableName: true
+})
 
-module.exports = Hospital;
+module.exports = Hospital
